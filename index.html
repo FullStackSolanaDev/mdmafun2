@@ -9,9 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+            0% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(0px) rotate(0deg); }
+            75% { transform: translateY(20px) rotate(-5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        @keyframes floatX {
+            0% { transform: translateX(0px); }
+            50% { transform: translateX(-20px); }
+            100% { transform: translateX(0px); }
         }
         @keyframes blink {
             0%, 100% { opacity: 1; }
@@ -53,7 +60,10 @@
             animation: glow 3s ease infinite;
         }
         .floating {
-            animation: float 6s ease-in-out infinite;
+            animation: float 8s ease-in-out infinite;
+        }
+        .floating-x {
+            animation: floatX 10s ease-in-out infinite;
         }
         .blinking {
             animation: blink 3s ease infinite;
@@ -94,6 +104,14 @@
             left: 0;
             z-index: -1;
         }
+        .header-character {
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            z-index: -1;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="relative">
@@ -107,6 +125,9 @@
             <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="10" xChannelSelector="R" yChannelSelector="G"/>
         </filter>
     </svg>
+    
+    <!-- Floating Characters in Header -->
+    <div id="header-characters"></div>
     
     <!-- Floating Elements Container -->
     <div id="floating-elements"></div>
@@ -793,9 +814,51 @@
         </div>
     </footer>
     
-    <script>
+   <script>
         // Initialize particles.js
         document.addEventListener('DOMContentLoaded', function() {
+            // Add all character images floating in header
+            const headerCharacters = document.getElementById('header-characters');
+            const characterImages = [
+                'https://i.postimg.cc/sDDM9Dtx/andy-black-bg.jpg',
+                'https://i.postimg.cc/qMbzmHTL/Brett-Black-BG.jpg',
+                'https://i.postimg.cc/Z5W02sYh/doge-black-bg.jpg',
+                'https://i.postimg.cc/8zxsSdsf/Floki-black-bg.jpg',
+                'https://i.postimg.cc/5y923nKT/pepe-black-bg.jpg',
+                'https://i.postimg.cc/NFNfPmWM/ratto-black-bg.jpg',
+                'https://i.postimg.cc/QxydQgQY/shiba-logo-black-bg.jpg',
+                'https://i.postimg.cc/cLt4XKTx/trump-black-bg.jpg',
+                'https://i.postimg.cc/hG94RHHN/WIF-black-bg.jpg',
+                'https://i.postimg.cc/C1Shhc05/Wojak-black-bg.jpg'
+            ];
+
+            characterImages.forEach((imgSrc, index) => {
+                const char = document.createElement('img');
+                char.src = imgSrc;
+                char.classList.add('header-character');
+                
+                // Random size between 60-120px
+                const size = Math.random() * 60 + 60;
+                char.style.width = `${size}px`;
+                char.style.height = `${size}px`;
+                
+                // Random position
+                char.style.left = `${Math.random() * 90 + 5}vw`;
+                char.style.top = `${Math.random() * 90 + 5}vh`;
+                
+                // Random animation
+                const animationType = Math.random() > 0.5 ? 'float' : 'floatX';
+                char.style.animation = `${animationType} ${Math.random() * 10 + 5}s ease-in-out infinite`;
+                char.style.animationDelay = `${Math.random() * 5}s`;
+                
+                // Random border color
+                const colors = ['#ec4899', '#8b5cf6', '#3b82f6', '#10b981', '#f59e0b'];
+                char.style.borderColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                headerCharacters.appendChild(char);
+            });
+
+            // Rest of your existing JavaScript remains the same
             particlesJS('particles-js', {
                 "particles": {
                     "number": {
