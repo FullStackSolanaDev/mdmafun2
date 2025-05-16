@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💊 $MDMA.fun | Memecoin Powered by Love & Vibes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff; }
+            50% { text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff; }
+            100% { text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff; }
+        }
+        @keyframes sparkle {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1.5); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+        
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background-color: #000;
+            color: white;
+            overflow-x: hidden;
+        }
+        .psychedelic-bg {
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .trippy-text {
+            animation: glow 3s ease infinite;
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        .blinking {
+            animation: blink 3s ease infinite;
+        }
+        .pulse {
+            animation: pulse 2s ease infinite;
+        }
+        .sparkle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkle 1s ease-out forwards;
+        }
+        .character-card:hover {
+            transform: rotate(5deg) scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+        }
+        .distortion {
+            transition: all 0.3s ease;
+        }
+        .distortion:hover {
+            filter: url('#displacementFilter');
+        }
+        .btn-cta {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+        .btn-cta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+        }
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <!-- SVG Filter for Distortion -->
+    <svg width="0" height="0" style="position:absolute;">
+        <filter id="displacementFilter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="turbulence"/>
+            <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="10" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+    </svg>
+    
+    <!-- Floating Elements Container -->
+    <div id="floating-elements"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black bg-opacity-70 backdrop-blur-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <img src="https://i.postimg.cc/sDDM9Dtx/andy-black-bg.jpg" alt="MDMA Logo" class="w-12 h-12 rounded-full border-2 border-pink-500">
+                    <span class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500">MDMA.fun</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-white hover:text-pink-400 transition">About</a>
+                    <a href="#utility" class="text-white hover:text-blue-400 transition">Utility</a>
+                    <a href="#tokenomics" class="text-white hover:text-purple-400 transition">Tokenomics</a>
+                    <a href="#roadmap" class="text-white hover:text-yellow-400 transition">Roadmap</a>
+                    <a href="#gallery" class="text-white hover:text-green-400 transition">Gallery</a>
+                    <a href="#community" class="text-white hover:text-red-400 transition">Community</a>
+                </div>
+                <button id="rave-mode" class="px-4 py-2 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold hover:from-purple-600 hover:to-pink-500 transition">
+                    🌈 Rave Mode
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-8">
+                <img src="https://i.postimg.cc/5y923nKT/pepe-black-bg.jpg" alt="MDMA Pepe" class="w-32 h-32 mx-auto rounded-full border-4 border-white shadow-lg floating">
+            </div>
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 trippy-text">
+                💊 $MDMA
+            </h1>
+            <p class="text-2xl md:text-3xl mb-8 blinking">
+                "Feels good man"
+            </p>
+            <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto">
+                The first memecoin powered by love, vibes & revenue sharing.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-6">
+                <a href="#" class="btn-cta px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold text-xl">
+                    ➤ Buy $MDMA
+                </a>
+                <a href="#" class="btn-cta px-8 py-4 rounded-full bg-gradient-to-r from-blue-500 to-teal-400 text-white font-bold text-xl">
+                    ➤ Join Community
+                </a>
+            </div>
+        </div>
+        
+        <!-- Floating Quotes -->
+        <div id="floating-quotes" class="absolute w-full h-full pointer-events-none">
+            <!-- Quotes will be added dynamically -->
+        </div>
+    </section>
+    
+    <!-- What Is $MDMA? -->
+    <section id="about" class="py-20 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0 md:pr-12">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500">
+                        What Is $MDMA?
+                    </h2>
+                    <p class="text-xl mb-6">
+                        $MDMA is the official memecoin of the MDMA.fun platform — powered by community, memes, vibes, and DeFi mechanics. It's a stake in something cosmic. Love. Revenue. Connection.
+                    </p>
+                    <div class="bg-black bg-opacity-50 p-6 rounded-xl border border-purple-500">
+                        <p class="text-xl italic blinking">
+                            "I feel everything"
+                        </p>
+                    </div>
+                </div>
+                <div class="md:w-1/2 relative">
+                    <div class="relative">
+                        <img src="https://i.postimg.cc/NFNfPmWM/ratto-black-bg.jpg" alt="MDMA Ratto" class="w-full h-auto rounded-2xl border-4 border-white shadow-xl floating">
+                        <div class="absolute -top-4 -right-4 w-16 h-16 bg-pink-500 rounded-full flex items-center justify-center shadow-lg pulse">
+                            <span class="text-2xl">💖</span>
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center shadow-lg pulse">
+                            <span class="text-2xl">🌀</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Real Utility Section -->
+    <section id="utility" class="py-20 bg-black bg-opacity-70 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-pink-500">
+                    Real Utility. Real Vibes.
+                </h2>
+                <p class="text-xl max-w-3xl mx-auto">
+                    Our platform brings actual value to holders through revenue sharing and community governance
+                </p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <div class="bg-gradient-to-br from-purple-900 to-pink-800 p-8 rounded-2xl shadow-2xl relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-full opacity-20" style="background-image: url('https://i.postimg.cc/5y923nKT/pepe-black-bg.jpg'); background-size: cover;"></div>
+                        <div class="relative z-10">
+                            <h3 class="text-3xl font-bold mb-6 text-white">Platform Utility</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="bg-pink-500 rounded-full p-2 mr-4">
+                                        <span class="text-white">💸</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-white">50% Revenue Sharing</h4>
+                                        <p class="text-gray-200">Half of all platform fees distributed to holders</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-blue-500 rounded-full p-2 mr-4">
+                                        <span class="text-white">🔒</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-white">0.25% Threshold</h4>
+                                        <p class="text-gray-200">Hold just 0.25% of supply to qualify for rewards</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-purple-500 rounded-full p-2 mr-4">
+                                        <span class="text-white">📊</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-white">Snapshot + Staking</h4>
+                                        <p class="text-gray-200">Easy integration with ERC-20 staking platforms</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <div class="bg-black bg-opacity-50 p-8 rounded-2xl border border-pink-500 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-full opacity-10" style="background-image: url('https://i.postimg.cc/sDDM9Dtx/andy-black-bg.jpg'); background-size: cover;"></div>
+                        <div class="relative z-10">
+                            <h3 class="text-3xl font-bold mb-6 text-pink-400">"Hold $MDMA. Join the cuddle puddle. Get paid."</h3>
+                            <p class="text-xl mb-6">
+                                Our platform isn't just about memes - it's about creating sustainable value for our community through innovative DeFi mechanics wrapped in wholesome degeneracy.
+                            </p>
+                            <div class="flex justify-center">
+                                <img src="https://i.postimg.cc/QxydQgQY/shiba-logo-black-bg.jpg" alt="MDMA Launchpad" class="w-64 h-auto rounded-xl border-2 border-white shadow-lg floating">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tokenomics Section -->
+    <section id="tokenomics" class="py-20 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+                    Tokenomics
+                </h2>
+                <p class="text-xl max-w-3xl mx-auto">
+                    Carefully designed for sustainability and community growth
+                </p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0">
+                    <div class="relative w-64 h-64 mx-auto">
+                        <!-- Donut Chart -->
+                        <svg viewBox="0 0 36 36" class="w-full h-full">
+                            <path d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#333"
+                                stroke-width="2"
+                                stroke-dasharray="70, 15, 10, 5, 10, 15"
+                                stroke-dashoffset="0"
+                                class="animate-spin-slow"/>
+                            
+                            <path d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#ec4899"
+                                stroke-width="2"
+                                stroke-dasharray="70, 100"
+                                stroke-dashoffset="25"/>
+                            
+                            <path d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#8b5cf6"
+                                stroke-width="2"
+                                stroke-dasharray="15, 100"
+                                stroke-dashoffset="95"/>
+                            
+                            <path d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#3b82f6"
+                                stroke-width="2"
+                                stroke-dasharray="10, 100"
+                                stroke-dashoffset="110"/>
+                            
+                            <path d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#10b981"
+                                stroke-width="2"
+                                stroke-dasharray="3, 100"
+                                stroke-dashoffset="120"/>
+                            
+                            <path d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#f59e0b"
+                                stroke-width="2"
+                                stroke-dasharray="2, 100"
+                                stroke-dashoffset="123"/>
+                        </svg>
+                        
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="text-4xl font-bold text-pink-500 mb-1">1B</div>
+                                <div class="text-lg text-white">Total Supply</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="max-w-md mx-auto">
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-pink-500 rounded-full p-3 mr-4">
+                                    <span class="text-white">💰</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">Total Supply</h3>
+                                    <p class="text-gray-300">1,000,000,000 $MDMA</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-purple-500 rounded-full p-3 mr-4">
+                                    <span class="text-white">📉</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">Tax</h3>
+                                    <p class="text-gray-300">5% on all transactions</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-blue-500 rounded-full p-3 mr-4">
+                                    <span class="text-white">📊</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">Allocation</h3>
+                                    <ul class="text-gray-300 list-disc pl-5 space-y-1">
+                                        <li>70% Liquidity</li>
+                                        <li>15% Platform Development</li>
+                                        <li>10% Marketing</li>
+                                        <li>3% Holder Rewards</li>
+                                        <li>2% Team</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-green-500 rounded-full p-3 mr-4">
+                                    <span class="text-white">🔒</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">Security</h3>
+                                    <p class="text-gray-300">Renounced Ownership + Ethereum Chain</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="py-20 bg-black bg-opacity-70 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
+                    Roadmap
+                </h2>
+                <p class="text-xl max-w-3xl mx-auto">
+                    Our journey to create the most wholesome degenerate ecosystem
+                </p>
+            </div>
+            
+            <div class="relative">
+                <!-- Timeline line -->
+                <div class="hidden md:block absolute left-1/2 h-full w-1 bg-gradient-to-b from-purple-500 to-pink-500 -ml-0.5"></div>
+                
+                <div class="space-y-8 md:space-y-16">
+                    <!-- Phase 1 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-12 mb-8 md:mb-0 md:text-right">
+                            <div class="bg-gradient-to-r from-purple-900 to-pink-800 p-6 rounded-2xl shadow-xl relative overflow-hidden distortion">
+                                <div class="absolute top-0 left-0 w-full h-full opacity-20" style="background-image: url('https://i.postimg.cc/5y923nKT/pepe-black-bg.jpg'); background-size: cover;"></div>
+                                <div class="relative z-10">
+                                    <h3 class="text-2xl font-bold text-white mb-2">Phase 1: Launch & Community</h3>
+                                    <ul class="text-gray-200 space-y-2">
+                                        <li class="flex items-center">
+                                            <span class="text-green-400 mr-2">✅</span> Token Launch
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="text-green-400 mr-2">✅</span> Community Growth
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="text-yellow-400 mr-2">🔜</span> Website + Docs
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex items-center justify-center md:w-1/2 md:pl-12">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg pulse">
+                                <span class="text-2xl">1</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 2 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="hidden md:flex md:w-1/2 md:pr-12 justify-center">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-teal-400 flex items-center justify-center shadow-lg pulse">
+                                <span class="text-2xl">2</span>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pl-12 mb-8 md:mb-0">
+                            <div class="bg-gradient-to-r from-blue-900 to-teal-800 p-6 rounded-2xl shadow-xl relative overflow-hidden distortion">
+                                <div class="absolute top-0 left-0 w-full h-full opacity-20" style="background-image: url('https://i.postimg.cc/sDDM9Dtx/andy-black-bg.jpg'); background-size: cover;"></div>
+                                <div class="relative z-10">
+                                    <h3 class="text-2xl font-bold text-white mb-2">Phase 2: Platform Development</h3>
+                                    <ul class="text-gray-200 space-y-2">
+                                        <li class="flex items-center">
+                                            <span class="text-yellow-400 mr-2">🔜</span> MDMA Launchpad
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="text-yellow-400 mr-2">🔜</span> First Revenue Share
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="text-yellow-400 mr-2">🔜</span> Marketing Push
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 3 -->
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-12 mb-8 md:mb-0 md:text-right">
+                            <div class="bg-gradient-to-r from-green-900 to-yellow-800 p-6 rounded-2xl shadow-xl relative overflow-hidden distortion">
+                                <div class="absolute top-0 left-0 w-full h-full opacity-20" style="background-image: url('https://i.postimg.cc/NFNfPmWM/ratto-black-bg.jpg'); background-size: cover;"></div>
+                                <div class="relative z-10">
+                                    <h3 class="text-2xl font-bold text-white mb-2">Phase 3: Expansion</h3>
+                                    <ul class="text-gray-200 space-y-2">
+                                        <li class="flex items-center">
+                                            <span class="text-purple-400 mr-2">🔮</span> Trippy Voting (Governance)
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="text-purple-400 mr-2">🌈</span> NFT Integration
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="text-purple-400 mr-2">🚀</span> Ecosystem Growth
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex items-center justify-center md:w-1/2 md:pl-12">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-yellow-500 flex items-center justify-center shadow-lg pulse">
+                                <span class="text-2xl">3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Trip Gallery -->
+    <section id="gallery" class="py-20 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500">
+                    Trip Gallery
+                </h2>
+                <p class="text-xl max-w-3xl mx-auto">
+                    Meet the colorful characters of the MDMA multiverse
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Character 1 -->
+                <div class="character-card bg-black bg-opacity-70 rounded-2xl overflow-hidden border-2 border-pink-500 transition-all duration-300 hover:border-purple-500 relative" style="background-image: url('https://i.postimg.cc/wvpvt6X6/Andy-funny-BG.jpg'); background-size: cover;">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 hover:bg-opacity-30 transition-all duration-300"></div>
+                    <div class="relative z-10 p-6 h-full flex flex-col">
+                        <div class="flex justify-center mb-4">
+                            <img src="https://i.postimg.cc/sDDM9Dtx/andy-black-bg.jpg" alt="Trippy Andy" class="w-24 h-24 rounded-full border-4 border-white shadow-lg">
+                        </div>
+                        <h3 class="text-2xl font-bold text-center text-white mb-2">Trippy Andy</h3>
+                        <p class="text-center italic text-pink-200 mb-4">"Wen moon, fren?"</p>
+                        <div class="flex justify-center mb-4">
+                            <div class="flex space-x-1">
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-200 text-center">
+                            The eternal optimist, always seeing patterns in the chaos. Believes every dip is just a setup for the next pump.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Character 2 -->
+                <div class="character-card bg-black bg-opacity-70 rounded-2xl overflow-hidden border-2 border-blue-500 transition-all duration-300 hover:border-teal-500 relative" style="background-image: url('https://i.postimg.cc/zfWvXLRt/brett-funny-bg.jpg'); background-size: cover;">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 hover:bg-opacity-30 transition-all duration-300"></div>
+                    <div class="relative z-10 p-6 h-full flex flex-col">
+                        <div class="flex justify-center mb-4">
+                            <img src="https://i.postimg.cc/qMbzmHTL/Brett-Black-BG.jpg" alt="MDMA Brett" class="w-24 h-24 rounded-full border-4 border-white shadow-lg">
+                        </div>
+                        <h3 class="text-2xl font-bold text-center text-white mb-2">MDMA Brett</h3>
+                        <p class="text-center italic text-blue-200 mb-4">"This is pure love."</p>
+                        <div class="flex justify-center mb-4">
+                            <div class="flex space-x-1">
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-200 text-center">
+                            The heart of the community. Spreads positivity and reminds everyone why we're really here - for the vibes.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Character 3 -->
+                <div class="character-card bg-black bg-opacity-70 rounded-2xl overflow-hidden border-2 border-purple-500 transition-all duration-300 hover:border-pink-500 relative" style="background-image: url('https://i.postimg.cc/15tzV7qN/Pepe-funny-bg.jpg'); background-size: cover;">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 hover:bg-opacity-30 transition-all duration-300"></div>
+                    <div class="relative z-10 p-6 h-full flex flex-col">
+                        <div class="flex justify-center mb-4">
+                            <img src="https://i.postimg.cc/5y923nKT/pepe-black-bg.jpg" alt="MDMA Pepe" class="w-24 h-24 rounded-full border-4 border-white shadow-lg">
+                        </div>
+                        <h3 class="text-2xl font-bold text-center text-white mb-2">MDMA Pepe</h3>
+                        <p class="text-center italic text-purple-200 mb-4">"Feels good man."</p>
+                        <div class="flex justify-center mb-4">
+                            <div class="flex space-x-1">
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-200 text-center">
+                            The original vibe checker. Knows when the market is about to turn and always keeps it real with the community.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Character 4 -->
+                <div class="character-card bg-black bg-opacity-70 rounded-2xl overflow-hidden border-2 border-yellow-500 transition-all duration-300 hover:border-orange-500 relative" style="background-image: url('https://i.postimg.cc/fLfbm6CY/doge-funny-bg.jpg'); background-size: cover;">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 hover:bg-opacity-30 transition-all duration-300"></div>
+                    <div class="relative z-10 p-6 h-full flex flex-col">
+                        <div class="flex justify-center mb-4">
+                            <img src="https://i.postimg.cc/sDDM9Dtx/andy-black-bg.jpg" alt="Degen Doge" class="w-24 h-24 rounded-full border-4 border-white shadow-lg">
+                        </div>
+                        <h3 class="text-2xl font-bold text-center text-white mb-2">Degen Doge</h3>
+                        <p class="text-center italic text-yellow-200 mb-4">"Much wow. Very moon."</p>
+                        <div class="flex justify-center mb-4">
+                            <div class="flex space-x-1">
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-200 text-center">
+                            The eternal optimist who's been through multiple cycles and still believes. Much wisdom. Very experience.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Character 5 -->
+                <div class="character-card bg-black bg-opacity-70 rounded-2xl overflow-hidden border-2 border-green-500 transition-all duration-300 hover:border-teal-500 relative" style="background-image: url('https://i.postimg.cc/jqv55YLb/Floki-funny-bg.jpg'); background-size: cover;">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 hover:bg-opacity-30 transition-all duration-300"></div>
+                    <div class="relative z-10 p-6 h-full flex flex-col">
+                        <div class="flex justify-center mb-4">
+                            <img src="https://i.postimg.cc/QxydQgQY/shiba-logo-black-bg.jpg" alt="Floki" class="w-24 h-24 rounded-full border-4 border-white shadow-lg">
+                        </div>
+                        <h3 class="text-2xl font-bold text-center text-white mb-2">Floki</h3>
+                        <p class="text-center italic text-green-200 mb-4">"To Valhalla!"</p>
+                        <div class="flex justify-center mb-4">
+                            <div class="flex space-x-1">
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-200 text-center">
+                            The warrior spirit of the community. Always ready for battle and never backs down from a challenge.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Character 6 -->
+                <div class="character-card bg-black bg-opacity-70 rounded-2xl overflow-hidden border-2 border-red-500 transition-all duration-300 hover:border-pink-500 relative" style="background-image: url('https://i.postimg.cc/Tw0Rpn29/trump-funny-bg.jpg'); background-size: cover;">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 hover:bg-opacity-30 transition-all duration-300"></div>
+                    <div class="relative z-10 p-6 h-full flex flex-col">
+                        <div class="flex justify-center mb-4">
+                            <img src="https://i.postimg.cc/cLt4XKTx/trump-black-bg.jpg" alt="Trump" class="w-24 h-24 rounded-full border-4 border-white shadow-lg">
+                        </div>
+                        <h3 class="text-2xl font-bold text-center text-white mb-2">Trump</h3>
+                        <p class="text-center italic text-red-200 mb-4">"We're gonna make memecoins great again!"</p>
+                        <div class="flex justify-center mb-4">
+                            <div class="flex space-x-1">
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                                <span class="text-2xl">🌀</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-200 text-center">
+                            The ultimate hype man. Nobody does rallies like this guy. Believe him, folks. Bigly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Vibe Zone -->
+    <section class="py-20 bg-gradient-to-br from-purple-900 to-pink-800 relative overflow-hidden">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-white">
+                The Vibe Zone
+            </h2>
+            
+            <div class="max-w-3xl mx-auto relative">
+                <div id="vibe-quotes" class="text-2xl md:text-3xl italic text-white mb-12 min-h-32 flex items-center justify-center">
+                    "We're all connected."
+                </div>
+                
+                <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none">
+                    <div class="w-16 h-16 rounded-full bg-pink-500 opacity-20 absolute -left-8 -top-8 pulse"></div>
+                    <div class="w-24 h-24 rounded-full bg-purple-500 opacity-20 absolute -right-12 top-1/4 pulse" style="animation-delay: 0.5s;"></div>
+                    <div class="w-20 h-20 rounded-full bg-blue-500 opacity-20 absolute left-1/4 bottom-0 pulse" style="animation-delay: 1s;"></div>
+                    <div class="w-12 h-12 rounded-full bg-yellow-500 opacity-20 absolute right-1/4 -bottom-6 pulse" style="animation-delay: 1.5s;"></div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center space-x-4">
+                <button id="prev-quote" class="w-12 h-12 rounded-full bg-white bg-opacity-20 flex items-center justify-center text-white hover:bg-opacity-30 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button id="next-quote" class="w-12 h-12 rounded-full bg-white bg-opacity-20 flex items-center justify-center text-white hover:bg-opacity-30 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Join Community -->
+    <section id="community" class="py-20 bg-black bg-opacity-80 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500">
+                    Join the Cuddle Puddle
+                </h2>
+                <p class="text-xl max-w-3xl mx-auto">
+                    Connect with our vibrant community of degens, memers, and vibe enthusiasts
+                </p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row items-center justify-center gap-8">
+                <!-- Telegram -->
+                <a href="#" class="w-full max-w-md bg-gradient-to-r from-blue-500 to-blue-600 p-6 rounded-2xl shadow-xl flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#0088cc">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5.25 8.33c.3.24.47.6.47.98 0 .38-.17.74-.47.98l-2.47 1.85-1.99 3.11c-.2.31-.55.5-.93.5-.13 0-.27-.03-.39-.08-.39-.16-.61-.56-.48-.95l.75-2.63-3.38-2.22-.37-.25c-.39-.26-.5-.75-.24-1.14.26-.39.75-.5 1.14-.24l.37.25 4.11 2.7 2.2-1.64-6.67-5.36c-.38-.3-.45-.86-.15-1.24.3-.38.86-.45 1.24-.15l8.13 6.53z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Telegram</h3>
+                    <p class="text-white text-center mb-4">Join our active community chat for the latest updates and vibes</p>
+                    <div class="px-6 py-2 bg-white bg-opacity-20 rounded-full text-white font-medium">
+                        <span id="telegram-count">5,000+</span> members
+                    </div>
+                </a>
+                
+                <!-- Twitter -->
+                <a href="#" class="w-full max-w-md bg-gradient-to-r from-blue-400 to-cyan-500 p-6 rounded-2xl shadow-xl flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#1DA1F2">
+                            <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Twitter</h3>
+                    <p class="text-white text-center mb-4">Follow us for announcements, memes, and degeneracy</p>
+                    <div class="px-6 py-2 bg-white bg-opacity-20 rounded-full text-white font-medium">
+                        <span id="twitter-count">10,000+</span> followers
+                    </div>
+                </a>
+                
+                <!-- Chart -->
+                <a href="#" class="w-full max-w-md bg-gradient-to-r from-purple-500 to-pink-500 p-6 rounded-2xl shadow-xl flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#8a2be2">
+                            <path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Live Chart</h3>
+                    <p class="text-white text-center mb-4">Track $MDMA price action in real-time</p>
+                    <div class="px-6 py-2 bg-white bg-opacity-20 rounded-full text-white font-medium">
+                        View on DexTools
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-12 bg-black bg-opacity-90 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-6 md:mb-0">
+                    <img src="https://i.postimg.cc/sDDM9Dtx/andy-black-bg.jpg" alt="MDMA Logo" class="w-10 h-10 rounded-full border-2 border-pink-500">
+                    <span class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500">MDMA.fun</span>
+                </div>
+                
+                <div class="flex space-x-6 mb-6 md:mb-0">
+                    <a href="#" class="text-gray-400 hover:text-pink-400 transition">Terms</a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition">Privacy</a>
+                    <a href="#" class="text-gray-400 hover:text-purple-400 transition">Docs</a>
+                    <a href="#" class="text-gray-400 hover:text-yellow-400 transition">Contact</a>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-pink-500 hover:text-white transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-blue-500 hover:text-white transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5.25 8.33c.3.24.47.6.47.98 0 .38-.17.74-.47.98l-2.47 1.85-1.99 3.11c-.2.31-.55.5-.93.5-.13 0-.27-.03-.39-.08-.39-.16-.61-.56-.48-.95l.75-2.63-3.38-2.22-.37-.25c-.39-.26-.5-.75-.24-1.14.26-.39.75-.5 1.14-.24l.37.25 4.11 2.7 2.2-1.64-6.67-5.36c-.38-.3-.45-.86-.15-1.24.3-.38.86-.45 1.24-.15l8.13 6.53z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-purple-500 hover:text-white transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-500">
+                <p>© 2023 MDMA.fun. All degeneracy reserved.</p>
+                <p class="mt-2 text-sm">Contract: 0x742d35Cc6634C0532925a3b844Bc454e4438f44e</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Initialize particles.js
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": ["#ec4899", "#8b5cf6", "#3b82f6", "#10b981", "#f59e0b"]
+                    },
+                    "shape": {
+                        "type": ["circle", "triangle", "star"],
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#ffffff",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 0.5
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+            
+            // Create floating elements
+            const floatingContainer = document.getElementById('floating-elements');
+            const characters = [
+                { emoji: '👁️', color: '#ec4899' },
+                { emoji: '💊', color: '#8b5cf6' },
+                { emoji: '🌀', color: '#3b82f6' },
+                { emoji: '💖', color: '#ec4899' },
+                { emoji: '✨', color: '#f59e0b' },
+                { emoji: '👁️', color: '#10b981' },
+                { emoji: '💊', color: '#8b5cf6' },
+                { emoji: '🌀', color: '#3b82f6' }
+            ];
+            
+            for (let i = 0; i < 15; i++) {
+                const element = document.createElement('div');
+                const char = characters[Math.floor(Math.random() * characters.length)];
+                
+                element.innerHTML = char.emoji;
+                element.style.position = 'absolute';
+                element.style.fontSize = Math.random() * 20 + 10 + 'px';
+                element.style.color = char.color;
+                element.style.top = Math.random() * 100 + 'vh';
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.opacity = Math.random() * 0.5 + 0.3;
+                element.style.animation = `float ${Math.random() * 6 + 3}s ease-in-out infinite`;
+                element.style.animationDelay = Math.random() * 5 + 's';
+                element.style.zIndex = '-1';
+                element.style.pointerEvents = 'none';
+                
+                floatingContainer.appendChild(element);
+            }
+            
+            // Floating quotes
+            const quotes = [
+                "We're all connected.",
+                "This is pure love.",
+                "Cuddle puddle intensifies.",
+                "I love you so much rn.",
+                "Touch my soul.",
+                "Feels good man.",
+                "Wen moon, fren?",
+                "Much wow. Very moon.",
+                "To Valhalla!",
+                "We're gonna make memecoins great again!"
+            ];
+            
+            const floatingQuotes = document.getElementById('floating-quotes');
+            
+            for (let i = 0; i < 5; i++) {
+                const quote = document.createElement('div');
+                quote.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+                quote.style.position = 'absolute';
+                quote.style.fontSize = Math.random() * 10 + 14 + 'px';
+                quote.style.color = `hsl(${Math.random() * 360}, 100%, 80%)`;
+                quote.style.top = Math.random() * 100 + 'vh';
+                quote.style.left = Math.random() * 100 + 'vw';
+                quote.style.opacity = '0';
+                quote.style.transition = 'opacity 2s';
+                quote.style.pointerEvents = 'none';
+                quote.style.maxWidth = '200px';
+                quote.style.textAlign = 'center';
+                
+                floatingQuotes.appendChild(quote);
+                
+                // Randomly show/hide quotes
+                setInterval(() => {
+                    quote.style.opacity = Math.random() > 0.7 ? '0.8' : '0';
+                    quote.style.top = Math.random() * 100 + 'vh';
+                    quote.style.left = Math.random() * 100 + 'vw';
+                }, Math.random() * 5000 + 5000);
+            }
+            
+            // Vibe quotes carousel
+            const vibeQuotes = [
+                "We're all connected.",
+                "This is pure love.",
+                "Cuddle puddle intensifies.",
+                "I love you so much rn.",
+                "Touch my soul.",
+                "Feels good man.",
+                "Wen moon, fren?",
+                "Much wow. Very moon.",
+                "To Valhalla!",
+                "We're gonna make memecoins great again!"
+            ];
+            
+            let currentQuote = 0;
+            const quoteElement = document.getElementById('vibe-quotes');
+            
+            function showQuote(index) {
+                quoteElement.style.opacity = '0';
+                setTimeout(() => {
+                    quoteElement.textContent = `"${vibeQuotes[index]}"`;
+                    quoteElement.style.opacity = '1';
+                }, 500);
+            }
+            
+            document.getElementById('next-quote').addEventListener('click', () => {
+                currentQuote = (currentQuote + 1) % vibeQuotes.length;
+                showQuote(currentQuote);
+            });
+            
+            document.getElementById('prev-quote').addEventListener('click', () => {
+                currentQuote = (currentQuote - 1 + vibeQuotes.length) % vibeQuotes.length;
+                showQuote(currentQuote);
+            });
+            
+            // Auto cycle quotes
+            setInterval(() => {
+                currentQuote = (currentQuote + 1) % vibeQuotes.length;
+                showQuote(currentQuote);
+            }, 5000);
+            
+            // Rave mode toggle
+            const raveModeBtn = document.getElementById('rave-mode');
+            let raveMode = false;
+            
+            raveModeBtn.addEventListener('click', () => {
+                raveMode = !raveMode;
+                
+                if (raveMode) {
+                    document.body.classList.add('psychedelic-bg');
+                    raveModeBtn.innerHTML = '🌀 Rave Mode ON';
+                    
+                    // Create sparkles on click
+                    document.addEventListener('mousemove', createSparkle);
+                } else {
+                    document.body.classList.remove('psychedelic-bg');
+                    raveModeBtn.innerHTML = '🌈 Rave Mode';
+                    document.removeEventListener('mousemove', createSparkle);
+                }
+            });
+            
+            function createSparkle(e) {
+                if (Math.random() > 0.3) return;
+                
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                
+                sparkle.style.left = e.pageX + 'px';
+                sparkle.style.top = e.pageY + 'px';
+                sparkle.style.width = Math.random() * 10 + 5 + 'px';
+                sparkle.style.height = sparkle.style.width;
+                sparkle.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 80%)`;
+                
+                document.body.appendChild(sparkle);
+                
+                // Remove sparkle after animation
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1000);
+            }
+            
+            // Random sparkles
+            setInterval(() => {
+                if (!raveMode) return;
+                
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                
+                sparkle.style.left = Math.random() * window.innerWidth + 'px';
+                sparkle.style.top = Math.random() * window.innerHeight + 'px';
+                sparkle.style.width = Math.random() * 15 + 5 + 'px';
+                sparkle.style.height = sparkle.style.width;
+                sparkle.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 80%)`;
+                
+                document.body.appendChild(sparkle);
+                
+                // Remove sparkle after animation
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1000);
+            }, 300);
+            
+            // Animate numbers for social counts
+            function animateValue(id, start, end, duration) {
+                let startTimestamp = null;
+                const element = document.getElementById(id);
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const value = Math.floor(progress * (end - start) + start);
+                    element.innerHTML = value.toLocaleString() + '+';
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+            
+            // Start animations when in view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.id === 'telegram-count') {
+                            animateValue('telegram-count', 0, 5000, 2000);
+                        }
+                        if (entry.target.id === 'twitter-count') {
+                            animateValue('twitter-count', 0, 10000, 2000);
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(document.getElementById('telegram-count'));
+            observer.observe(document.getElementById('twitter-count'));
+            
+            // Add distortion effect on scroll
+            let lastScroll = 0;
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (Math.abs(currentScroll - lastScroll) > 50) {
+                    document.body.classList.add('distortion');
+                    
+                    setTimeout(() => {
+                        document.body.classList.remove('distortion');
+                    }, 300);
+                    
+                    lastScroll = currentScroll;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
